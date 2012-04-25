@@ -13,6 +13,8 @@ Terminal 1, or the largest/central building. If multiple terminals are dispersed
 centroid between them is used (often in a parking lot or round about area). See London 
 Heathrow for example. The military terminal is not preferred at joint civilian airports. 
 
+**Parking** - If terminals are spread out, use the centroid between them. Most often a parking lot.
+
 **Ramp** - Pavement area outside the passenger terminal area. Used when terminal building is not clear 
 on airphoto interpretation.
 
