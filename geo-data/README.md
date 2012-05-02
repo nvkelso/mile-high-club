@@ -50,8 +50,8 @@ Using the following ogr2ogr command (relies on GDAL and OGR being installed):
 	
 TODO:
 	
-* "scalerank" needs to be converted to Natural Earth's modified web map zoom integers. They are now a dup of the natlscale values.
-* Include the fullname of the airport (now it's only the name with abbreviated Int'l, etc).
+1. "scalerank" needs to be converted to Natural Earth's modified web map zoom integers. They are now a dup of the natlscale values.
+2. Include the fullname of the airport (now it's only the name with abbreviated Int'l, etc).
 
 ## Metadata
 
