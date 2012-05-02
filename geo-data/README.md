@@ -26,3 +26,35 @@ runway and taxiway on airphoto interpretation.
 More often it's within a mile of the actual location. Accuracy is low due to geocoding 
 based on town name, use of DD.DD° or DD.DDDD° format instead of DD.DDDDDD° for latitude 
 and longitude values.
+
+## Exporting for Natural Earth
+
+The included shell script:
+
+	export_natural_earth_version.sh
+	
+can be run as:
+
+	./export_natural_earth_version.sh
+	
+To create the following files:
+
+	ne_10m_airports.dbf
+	ne_10m_airports.prj
+	ne_10m_airports.shp
+	ne_10m_airports.shx
+	
+Using the following ogr2ogr command (relies on GDAL and OGR being installed):
+
+	ogr2ogr -overwrite -sql "SELECT natlScale as scalerank, natlScale, 'Airport' as featurecla, type_nvk as type, label_lng as name, label_sm as abbrev, location, gps_code, iata_cod_1 as iata_code, wikipedia_ as wikipedia FROM aaron_airports_oct26_win1252_plus_dafif_plus_our_all WHERE natlScale >= 8 ORDER BY natlScale" ne_10m_airports.shp aaron_airports_oct26_win1252_plus_dafif_plus_our_all.shp
+	
+TODO:
+	
+* "scalerank" needs to be converted to Natural Earth's modified web map zoom integers. They are now a dup of the natlscale values.
+* Include the fullname of the airport (now it's only the name with abbreviated Int'l, etc).
+
+## Metadata
+
+These GIS data files are in Windows-1252 character encoding and in the geographic lat/long projection (WGS84). 
+
+They are from a variety of sources, merged and quality checked by Nathaniel Vaughn KELSO based partly on work by Aaron.
