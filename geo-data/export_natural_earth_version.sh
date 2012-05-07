@@ -1,3 +1,3 @@
 #!/bin/bash
 
-ogr2ogr -overwrite -sql "SELECT natlScale as scalerank, natlScale, 'Airport' as featurecla, type_nvk as type, label_lng as name, label_sm as abbrev, location, gps_code, iata_cod_1 as iata_code, wikipedia_ as wikipedia FROM aaron_airports_oct26_win1252_plus_dafif_plus_our_all WHERE natlScale >= 8 ORDER BY natlScale" ne_10m_airports.shp aaron_airports_oct26_win1252_plus_dafif_plus_our_all.shp
+ogr2ogr -overwrite -sql "SELECT scaleRank as scalerank, 'Airport' as featurecla, type_nvk as type, label_lng as name, label_sm as abbrev, location, gps_code, iata_cod_1 as iata_code, wikipedia_ as wikipedia, natlScale FROM aaron_airports_oct26_win1252_plus_dafif_plus_our_all WHERE natlScale >= 8 ORDER BY natlScale" ne_10m_airports.shp aaron_airports_oct26_win1252_plus_dafif_plus_our_all.shp
