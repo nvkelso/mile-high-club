@@ -44,9 +44,9 @@ To create the following files:
 	ne_10m_airports.shp
 	ne_10m_airports.shx
 	
-Using the following ogr2ogr command (relies on GDAL and OGR being installed):
+Using the following **ogr2ogr** command (relies on GDAL and OGR being installed and will **overwrite** existing files):
 
-	ogr2ogr -overwrite -sql "SELECT scaleRank as scalerank, natlScale, 'Airport' as featurecla, type_nvk as type, label_lng as name, label_sm as abbrev, location, gps_code, iata_cod_1 as iata_code, wikipedia_ as wikipedia FROM aaron_airports_oct26_win1252_plus_dafif_plus_our_all WHERE natlScale >= 8 ORDER BY natlScale" ne_10m_airports.shp aaron_airports_oct26_win1252_plus_dafif_plus_our_all.shp
+	ogr2ogr -overwrite -sql "SELECT scaleRank as scalerank, 'Airport' as featurecla, type_nvk as type, label_lng as name, label_sm as abbrev, location, gps_code, iata_cod_1 as iata_code, wikipedia_ as wikipedia, natlScale FROM aaron_airports_oct26_win1252_plus_dafif_plus_our_all WHERE natlScale >= 8 ORDER BY natlScale" ne_10m_airports.shp aaron_airports_oct26_win1252_plus_dafif_plus_our_all.shp
 	
 Note: 
 	
@@ -84,3 +84,9 @@ TODO:
 These GIS data files are in Windows-1252 character encoding and in the geographic lat/long projection (WGS84). 
 
 They are from a variety of sources, merged and quality checked by Nathaniel Vaughn KELSO based partly on work by Aaron.
+
+## Requirements 
+
+Only for shell script mentioned above only.
+
+* GDAL/OGR => `1.9`
