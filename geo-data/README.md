@@ -46,12 +46,38 @@ To create the following files:
 	
 Using the following ogr2ogr command (relies on GDAL and OGR being installed):
 
-	ogr2ogr -overwrite -sql "SELECT natlScale as scalerank, natlScale, 'Airport' as featurecla, type_nvk as type, label_lng as name, label_sm as abbrev, location, gps_code, iata_cod_1 as iata_code, wikipedia_ as wikipedia FROM aaron_airports_oct26_win1252_plus_dafif_plus_our_all WHERE natlScale >= 8 ORDER BY natlScale" ne_10m_airports.shp aaron_airports_oct26_win1252_plus_dafif_plus_our_all.shp
+	ogr2ogr -overwrite -sql "SELECT scaleRank as scalerank, natlScale, 'Airport' as featurecla, type_nvk as type, label_lng as name, label_sm as abbrev, location, gps_code, iata_cod_1 as iata_code, wikipedia_ as wikipedia FROM aaron_airports_oct26_win1252_plus_dafif_plus_our_all WHERE natlScale >= 8 ORDER BY natlScale" ne_10m_airports.shp aaron_airports_oct26_win1252_plus_dafif_plus_our_all.shp
 	
+Note: 
+	
+**natlScale** is converted to Natural Earth's modified web map zoom integers (**scaleRank**):
+
+    Conversion from: https://github.com/nvkelso/geo-how-to/wiki/Map-scales---zooms
+    Which are slightly differnt than raw web map zooms.
+    
+	if [natlScale] = 150     then scaleRank = 2    // consistent with web zoom...
+	if [natlScale] =  75     then scaleRank = 3    
+	if [natlScale] =  50     then scaleRank = 4    // special to natural earth
+	if [natlScale] =  30     then scaleRank = 5    // 1 off from web zoom...
+	if [natlScale] =  20     then scaleRank = 6
+	if [natlScale] =  15     then scaleRank = 7    // this could use some work, edit out
+	if [natlScale] =  10     then scaleRank = 8
+	if [natlScale] =   8     then scaleRank = 9    // note 5 and 8 merge
+	if [natlScale] =   5     then scaleRank = 9    // note 5 and 8 merge
+	if [natlScale] =   2     then scaleRank = 10
+	if [natlScale] =   1     then scaleRank = 11
+	if [natlScale] =   0.5   then scaleRank = 12
+	if [natlScale] =   0.25  then scaleRank = 13
+	if [natlScale] =   0.15  then scaleRank = 14
+	if [natlScale] =   0.10  then scaleRank = 15
+	if [natlScale] =   0.09  then scaleRank = 16   // what is this doing here?
+	if [natlScale] =   0.015 then scaleRank = 17   // paragliders
+	if [natlScale] =   0.01  then scaleRank = 18   // mostly back on track
+	if [natlScale] =  -1     then scaleRank = 100  // these should be removed
+
 TODO:
-	
-1. "scalerank" needs to be converted to Natural Earth's modified web map zoom integers. They are now a dup of the natlscale values.
-2. Include the fullname of the airport (now it's only the name with abbreviated Int'l, etc).
+
+1. Include the fullname of the airport (now it's only the name with abbreviated Int'l, etc).
 
 ## Metadata
 
